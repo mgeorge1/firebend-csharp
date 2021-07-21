@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using Data;
+using Services.Models;
 
 namespace Services
 {
