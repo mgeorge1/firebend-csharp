@@ -19,7 +19,7 @@ namespace Data
         public Guid Rowguid { get; set; }
         public DateTime ModifiedDate { get; set; }
 
-        public virtual SalesOrderHeader SalesOrder { get; set; }
-        public virtual SpecialOfferProduct SpecialOfferProduct { get; set; }
+
+
     }
 }

@@ -10,7 +10,6 @@ namespace Data
         public Location()
         {
             ProductInventories = new HashSet<ProductInventory>();
-            WorkOrderRoutings = new HashSet<WorkOrderRouting>();
         }
 
         public short LocationId { get; set; }
@@ -20,6 +19,5 @@ namespace Data
         public DateTime ModifiedDate { get; set; }
 
         public virtual ICollection<ProductInventory> ProductInventories { get; set; }
-        public virtual ICollection<WorkOrderRouting> WorkOrderRoutings { get; set; }
     }
 }

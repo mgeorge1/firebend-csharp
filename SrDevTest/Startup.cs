@@ -16,6 +16,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Services;
 
+
 namespace SrDevTest
 {
     public class Startup
@@ -39,18 +40,22 @@ namespace SrDevTest
             var mapper = mappingConfig.CreateMapper();
             services.AddSingleton(mapper);
             services.AddDbContext<AdventureWorks2019Context>(context =>
-                context.UseSqlServer(Configuration.GetConnectionString("advworks")));
+                context.UseSqlite( ContextSetupForTest.CreateInMemoryDatabase()));
             services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo {Title = "SrDevTest", Version = "v1"}); });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, 
+            AdventureWorks2019Context context, ILogger<Startup> logger)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "SrDevTest v1"));
+                context.Database.EnsureCreated();
+                var pass = ContextSetupForTest.SeedDatabase(context);
+                logger.LogInformation(pass);
             }
 
             app.UseHttpsRedirection();

@@ -6,16 +6,7 @@
 
     <ItemGroup>
         <PackageReference Include="AutoMapper" Version="10.1.1" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.7" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.7">
-          <PrivateAssets>all</PrivateAssets>
-          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-        </PackageReference>
-        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.7" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.7">
-          <PrivateAssets>all</PrivateAssets>
-          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-        </PackageReference>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.8" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
     </ItemGroup>
 
@@ -23,5 +14,19 @@
       <ProjectReference Include="..\Data\Data.csproj" />
       <ProjectReference Include="..\Services\Services.csproj" />
     </ItemGroup>
+
+    <ItemGroup>
+      <Content Remove="SeedData\Location.json" />
+      <None Include="SeedData\Location.json">
+        <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      </None>
+      <None Update="SeedData\testing.db">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+
+
 
 </Project>
