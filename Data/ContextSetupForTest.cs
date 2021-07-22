@@ -35,8 +35,8 @@ namespace Data
        
                 returnString += ":" + SeedEntity<Location>(context);
                 returnString += ":" + SeedEntity<Product>(context);
-                returnString += ":" + SeedEntity<ProductCategory>(context);
-                returnString += ":" + SeedEntity<ProductDescription>(context);
+
+                returnString += ":" + SeedEntity<ProductInventory>(context);
                 returnString += ":" + SeedEntity<SalesOrderDetail>(context);
 
                 return returnString;
@@ -53,8 +53,8 @@ namespace Data
             if (!ctx.Set<T>().Any())
             {
                 var insertString = File.ReadAllText($@"./SeedData/{typeof(T).Name}.json");
-                var locations = JsonSerializer.Deserialize<List<T>>(insertString);
-                ctx.AddRange(locations);
+                var entity = JsonSerializer.Deserialize<List<T>>(insertString);
+                ctx.AddRange(entity);
                 ctx.SaveChanges();
                 return $@"{typeof(T).Name}.json completed";
             }

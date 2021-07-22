@@ -96,66 +96,6 @@ namespace Data
                     .HasComment("Location description.");
             });
 
-            modelBuilder.Entity<ProductCategory>(entity =>
-            {
-                entity.ToTable("ProductCategory");
-
-                entity.HasComment("High-level product categorization.");
-
-                entity.HasIndex(e => e.Name, "AK_ProductCategory_Name")
-                    .IsUnique();
-
-                entity.HasIndex(e => e.Rowguid, "AK_ProductCategory_rowguid")
-                    .IsUnique();
-
-                entity.Property(e => e.ProductCategoryId)
-                    .HasColumnName("ProductCategoryID")
-                    .HasComment("Primary key for ProductCategory records.");
-
-                entity.Property(e => e.ModifiedDate)
-                    .HasColumnType("datetime")
-                    .HasDefaultValueSql("(datetime('now','localtime'))")
-                    .HasComment("Date and time the record was last updated.");
-
-                entity.Property(e => e.Name)
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .HasComment("Category description.");
-
-                entity.Property(e => e.Rowguid)
-                    .HasColumnName("rowguid")
-                    .HasComment("ROWGUIDCOL number uniquely identifying the record. Used to support a merge replication sample.");
-            });
-
-
-            modelBuilder.Entity<ProductDescription>(entity =>
-            {
-                entity.ToTable("ProductDescription");
-
-                entity.HasComment("Product descriptions in several languages.");
-
-                entity.HasIndex(e => e.Rowguid, "AK_ProductDescription_rowguid")
-                    .IsUnique();
-
-                entity.Property(e => e.ProductDescriptionId)
-                    .HasColumnName("ProductDescriptionID")
-                    .HasComment("Primary key for ProductDescription records.");
-
-                entity.Property(e => e.Description)
-                    .IsRequired()
-                    .HasMaxLength(400)
-                    .HasComment("Description of the product.");
-
-                entity.Property(e => e.ModifiedDate)
-                    .HasColumnType("datetime")
-                    .HasDefaultValueSql("(datetime('now','localtime'))")
-                    .HasComment("Date and time the record was last updated.");
-
-                entity.Property(e => e.Rowguid)
-                    .HasColumnName("rowguid")
-                    .HasComment("ROWGUIDCOL number uniquely identifying the record. Used to support a merge replication sample.");
-            });
-
             modelBuilder.Entity<ProductInventory>(entity =>
             {
                 entity.HasKey(e => new { e.ProductId, e.LocationId })
