@@ -63,7 +63,12 @@ namespace Data
 
 
         }
-        
+        public static List<T> GetEntities<T>()
+        {
+                var insertString = File.ReadAllText($@"./SeedData/{typeof(T).Name}.json");
+                var entity = JsonSerializer.Deserialize<List<T>>(insertString);
+                return entity;
+        }
       
   
     }
