@@ -26,7 +26,7 @@ namespace Data
         public virtual DbSet<Location> Locations { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<ProductCategory> ProductCategories { get; set; }
-   public virtual DbSet<ProductDescription> ProductDescriptions { get; set; }
+        public virtual DbSet<ProductDescription> ProductDescriptions { get; set; }
         public virtual DbSet<ProductInventory> ProductInventories { get; set; }
         public virtual DbSet<SalesOrderDetail> SalesOrderDetails { get; set; }
 
@@ -141,13 +141,6 @@ namespace Data
                     .HasForeignKey(d => d.ProductId)
                     .OnDelete(DeleteBehavior.ClientSetNull);
             });
-
-  
-
-
-
-
-
 
 
             OnModelCreatingPartial(modelBuilder);
